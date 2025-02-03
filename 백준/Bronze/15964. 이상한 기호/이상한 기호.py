@@ -1,8 +1,8 @@
 import sys
 
 def main():
-    a, b = map(int, sys.stdin.readline().split())
-    result = (a + b) * (a - b)
+    A, B  = map(int, sys.stdin.readline().split())
+    result = (A+B)*(A-B)
     print(result)
 
 if __name__ == "__main__":
