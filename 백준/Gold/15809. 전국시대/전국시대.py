@@ -3,10 +3,10 @@ def make_set(x):
     return parents
 
 def find_set(x):
-    while x != parent[x]:
-        parent[x] = parent[parent[x]]
-        x = parent[x]
-    return x
+    if parent[x] == x:
+            return x
+    parent[x] = find_set(parent[x])
+    return parent[x]
 
 def union_set(o, x, y):
     boss_x = find_set(x)
