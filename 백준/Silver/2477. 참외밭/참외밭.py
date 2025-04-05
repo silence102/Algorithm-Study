@@ -1,33 +1,28 @@
 N = int(input())
 
-k_melon = []
-for _ in range(6):
-    d, l = map(int, input().split())
-    k_melon.append((d, l))
+k_melon = [tuple(map(int, input().split())) for _ in range(6)]
 
-total1 = []
-total2 = []
-
-sort_k = sorted(k_melon, key=lambda x:x[1], reverse=True)
-total1.append(sort_k[0])
-
-if sort_k[0][0] == 1 or sort_k[0][0] == 2:
-    for i in range(1,6):
-        if sort_k[i][0] == 3 or sort_k[i][0] == 4:
-            total1.append(sort_k[i])
-            break
-else:
-    for i in range(1,6):
-        if sort_k[i][0] == 1 or sort_k[i][0] == 2:
-            total1.append(sort_k[i])
-            break
+max_width = 0
+max_height = 0
+max_width_idx = 0
+max_height_idx = 0
 
 for i in range(6):
-    if k_melon[i] in total1:
-        total2.append(k_melon[(i + 3) % 6])
+    d, l = k_melon[i]
+    if d == 1 or d == 2:
+        if l > max_width:
+            max_width = l
+            max_width_idx = i
+    else:
+        if l > max_height:
+            max_height = l
+            max_height_idx = i
 
-total1 = total1[0][1] * total1[1][1]
+big = max_width * max_height
 
-total2 = total2[0][1] * total2[1][1]
+small_idx1 = (max_width_idx + 3) % 6
+small_idx2 = (max_height_idx + 3) % 6 
 
-print((total1 - total2) * N)
+small = k_melon[small_idx1][1] * k_melon[small_idx2][1]
+
+print((big-small) * N)
